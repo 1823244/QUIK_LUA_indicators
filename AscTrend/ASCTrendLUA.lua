@@ -56,11 +56,11 @@ function OnCalculate(index)
 	for count = bar, bar-9, -1 do
 		local H_bar = H(count)
 		if H_bar == nil then
-			H_bar = 0
+			return nil, nil
 		end
 		local L_bar = L(count)
 		if L_bar == nil then
-			L_bar = 0
+			return nil, nil
 		end
 			
 		AvgRange = AvgRange + math.abs(H_bar - L_bar)
@@ -74,10 +74,10 @@ function OnCalculate(index)
 		local O_bar = O(count)
 		local C_bar = C(count-1)
 		if O_bar == nil then
-			O_bar = 0
+			return nil, nil
 		end
 		if C_bar == nil then
-			C_bar = 0
+			return nil, nil
 		end
 		
 		if math.abs( O_bar - C_bar ) >= Range * 2 then
@@ -98,10 +98,10 @@ function OnCalculate(index)
 		local C_bar = O(count)
 		local C3_bar = C(count-3)
 		if C_bar == nil then
-			C_bar = 0
+			return nil, nil
 		end
 		if C3_bar == nil then
-			C3_bar = 0
+			return nil, nil
 		end
 		
 		if math.abs( C3_bar - C_bar ) >= Range * 4.6 then
@@ -156,7 +156,7 @@ function OnCalculate(index)
 		
 			local H_bar = H(bar)
 			if H_bar == nil then
-				H_bar = 0
+				return nil, nil
 			end		
 			value3 = H_bar + Range*0.5
 			return nil, value3
@@ -182,7 +182,7 @@ function OnCalculate(index)
 		if Vel < x2 then
 			local L_bar = H(bar)
 			if L_bar == nil then
-				L_bar = 0
+				return nil, nil
 			end			
 			value3=L_bar-Range*0.5
 			return value3, nil
@@ -222,14 +222,14 @@ Where:
 		for i = index - n + 1, index do
 			local H_bar = H(i)
 			if H_bar == nil then
-				H_bar = 0
+				return nil, nil
 			end
 			if H_bar > highestHigh then
 				highestHigh = H_bar
 			end
 			local L_bar = L(i)
 			if L_bar == nil then
-				L_bar = 0
+				return nil, nil
 			end
 			if L_bar < lowestLow then
 				lowestLow = L_bar
@@ -237,7 +237,7 @@ Where:
 		end
 		local C_bar = C(index)
 		if C_bar == nil then
-			C_bar = 0
+			return nil, nil
 		end
 		wpr = ((highestHigh - C_bar) / (highestHigh - lowestLow)) * (-100)
 		return wpr	
