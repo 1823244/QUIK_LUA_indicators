@@ -180,7 +180,7 @@ function OnCalculate(index)
 			end
 		end
 		if Vel < x2 then
-			local L_bar = H(bar)
+			local L_bar = L(bar)
 			if L_bar == nil then
 				return nil, nil
 			end			
